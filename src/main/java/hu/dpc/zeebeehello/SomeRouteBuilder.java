@@ -1,6 +1,7 @@
 package hu.dpc.zeebeehello;
 
 import io.zeebe.client.ZeebeClient;
+import io.zeebe.client.api.response.WorkflowInstanceEvent;
 import org.apache.camel.builder.RouteBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,17 +64,17 @@ public class SomeRouteBuilder extends RouteBuilder {
     }
 
     private void zeebeStartInstance(String txId) {
-        zeebeClient.newCreateInstanceCommand()
+        WorkflowInstanceEvent instance = zeebeClient.newCreateInstanceCommand()
                 .bpmnProcessId("PaymentTest")
                 .latestVersion()
                 .variables("{ \"txId\": \"" + txId + "\" }")
-                .send();
+                .send()
+                .join();
 
 //        logger.info("zeebee workflow instance {} created with txId {}", instance.getWorkflowInstanceKey(), txId);
     }
 
     private void zeebeCorrelate(String txId) {
-        logger.info("correlating to {}", txId);
         Void paymentReceived = zeebeClient.newPublishMessageCommand()
                 .messageName("PaymentReceived")
                 .correlationKey(txId)
