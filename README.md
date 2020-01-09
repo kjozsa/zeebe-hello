@@ -10,7 +10,7 @@
 
 ### Notes
 the available REST endpoints are following this pattern:
-http://localhost:5000/test/start/<NR>/<TX_ID>
+http://localhost:5000/test/start/NR/TX_ID
 
 where `NR` is the number of iterations and `TX_ID` is the business key to start from. 
 
