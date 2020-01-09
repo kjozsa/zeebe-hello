@@ -25,7 +25,6 @@ public class CamelContextConfig {
                 camelContext.setMessageHistory(false);
                 camelContext.setStreamCaching(false);
 
-                // rest config
                 RestConfiguration rest = new RestConfiguration();
                 camelContext.setRestConfiguration(rest);
                 rest.setComponent("jetty");
