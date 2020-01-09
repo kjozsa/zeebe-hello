@@ -1,9 +1,12 @@
-version: '3'
+version: "3"
 services:
   zeebe-hello:
     build: .
     ports:
       - "5000:5000"
-    extra_hosts:
-      - "zeebe:10.3.2.148"
-
+    links:
+      - zeebe
+  zeebe:
+    image: camunda/zeebe:0.22.0-alpha2
+    ports:
+      - "26500:26500"
