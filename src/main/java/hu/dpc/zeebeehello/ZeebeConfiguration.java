@@ -10,7 +10,7 @@ public class ZeebeConfiguration {
     @Bean
     public ZeebeClient setup() {
         return ZeebeClient.newClientBuilder()
-                .brokerContactPoint("127.0.0.1:26500")
+                .brokerContactPoint("zeebe:26500")
                 .usePlaintext()
                 .build();
     }
